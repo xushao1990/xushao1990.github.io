@@ -11,4 +11,9 @@ p(meta). 2014年05月25日21:58:01 - 徐同同
 
 First
 
-<script src="https://gist.github.com/xushao1990/3fb3e16bf03dbeaa7e29.js"></script>
+<pree class="prettyprint">
+
+Video *video = [[Video alloc] init];
+video.name = @"first video";
+
+</pre>
