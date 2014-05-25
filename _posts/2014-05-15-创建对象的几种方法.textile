@@ -1,0 +1,14 @@
+---
+layout: post
+title: 创建对象的几种方法
+---
+
+h1. {{ page.title }}
+
+p(meta). 2014年05月25日21:58:01 - 徐同同
+
+最近写了一个播放器，demo中需要创建video的实例对象，总结一下创建对象的几种方法。
+
+First
+
+<script src="https://gist.github.com/xushao1990/3fb3e16bf03dbeaa7e29.js"></script>
