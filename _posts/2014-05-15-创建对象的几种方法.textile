@@ -11,6 +11,7 @@ p(meta). 2014年05月25日21:58:01 - 徐同同
 
 First
 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 <pree class="prettyprint">
 
 Video *video = [[Video alloc] init];
