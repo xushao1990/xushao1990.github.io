@@ -9,12 +9,26 @@ p(meta). 2014年05月25日21:58:01 - 徐同同
 
 最近写了一个播放器，demo中需要创建video的实例对象，总结一下创建对象的几种方法。
 
-First
-
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-<pree class="prettyprint">
-
-Video *video = [[Video alloc] init];
-video.name = @"first video";
-
+First,创建一个Video的Class，然后创建对象
+<script src="https://gist.github.com/xushao1990/3fb3e16bf03dbeaa7e29.js"></script>
+Second,创建一个Object实例，动态添加属性
+<script src="https://gist.github.com/xushao1990/96501519d85a6dcd550f.js"></script>
+Third,动态创建video类，然后创建实例
+<script src="https://gist.github.com/xushao1990/44066c6d7f37ec266692.js"></script>
+<pre class="prettyprint">
+const char *className = "Video";
+Class kClass = objc_getClass(className);
+if (!kClass) {
+    Class superClass = [NSObject class];
+    kClass = objc_allocateClassPair(superClass, className, 0);
+}
+NSUInteger size;
+NSUInteger alignment;
+NSGetSizeAndAlignment("*", &size, &alignment);
+class_addIvar(kClass, "name", size, alignment, "*");
+//注册到运行时
+objc_registerClassPair(kClass);
+    
+id video = [[kClass alloc] init];
+[video setValue:@"third video" forKey:@"name"];
 </pre>

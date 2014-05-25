@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<title>{{ page.title }} - {{ site.title }}</title>
+		<title>创建对象的几种方法 - 未来某天</title>
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="/css/syntax.css" />
 		<link href="desert.css" rel="stylesheet" type="text/css" media="all">
@@ -20,13 +20,37 @@
 
 	<body>
 		<div id="logo">
-			<h1><a href="/">{{ site.title }}</a></h1>
+			<h1><a href="/">未来某天</a></h1>
 		</div>
 		<div id="wrapper">
 			<div id="content">
-				<h2>{{ page.title }}</h2>
+				<h2>创建对象的几种方法</h2>
 				<div class="cnt">
-					{{ content }}
+					<h1>创建对象的几种方法</h1>
+<p class="meta">2014年05月25日21:58:01 &#8211; 徐同同</p>
+<p>最近写了一个播放器，demo中需要创建video的实例对象，总结一下创建对象的几种方法。</p>
+<p>First,创建一个Video的Class，然后创建对象<br />
+<script src="https://gist.github.com/xushao1990/3fb3e16bf03dbeaa7e29.js"></script><br />
+Second,创建一个Object实例，动态添加属性<br />
+<script src="https://gist.github.com/xushao1990/96501519d85a6dcd550f.js"></script><br />
+Third,动态创建video类，然后创建实例<br />
+<script src="https://gist.github.com/xushao1990/44066c6d7f37ec266692.js"></script><br />
+<pre class="prettyprint"><br />
+const char <strong>className = &#8220;Video&#8221;;<br />
+Class kClass = objc_getClass(className);<br />
+if (!kClass) {<br />
+    Class superClass = [NSObject class];<br />
+    kClass = objc_allocateClassPair(superClass, className, 0);<br />
+}<br />
+NSUInteger size;<br />
+NSUInteger alignment;<br />
+NSGetSizeAndAlignment(&quot;</strong>&quot;, &amp;size, &amp;alignment);<br />
+class_addIvar(kClass, &#8220;name&#8221;, size, alignment, &#8220;*&#8221;);<br />
+//注册到运行时<br />
+objc_registerClassPair(kClass);</p>
+<p>id video = [[kClass alloc] init];<br />
+[video setValue:<code>"third video" forKey:</code>&#8220;name&#8221;];<br />
+</pre></p>
 					<p id="state">若无特别说明，本站文章均为原创，转载请保留链接，谢谢</p>
 				</div>
 				<div id="disqus_thread"></div>
