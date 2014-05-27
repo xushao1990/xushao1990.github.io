@@ -26,17 +26,22 @@
 			<div id="content">
 				<h2>创建对象的几种方法</h2>
 				<div class="cnt">
-					<h1>创建对象的几种方法</h1>
-<p class="meta">2014年05月25日21:58:01 &#8211; 徐同同</p>
+					<p><!-- h1. 创建对象的几种方法 --></p>
+<p><!-- p(meta). 2014年05月25日21:58:01 - 徐同同 --></p>
 <p>最近写了一个播放器，demo中需要创建video的实例对象，总结一下创建对象的几种方法。</p>
 <p>First,创建一个Video的Class，然后创建对象<br />
-<script src="https://gist.github.com/xushao1990/3fb3e16bf03dbeaa7e29.js"></script><br />
-Second,创建一个Object实例，动态添加属性<br />
-<script src="https://gist.github.com/xushao1990/96501519d85a6dcd550f.js"></script><br />
-Third,动态创建video类，然后创建实例<br />
-<script src="https://gist.github.com/xushao1990/44066c6d7f37ec266692.js"></script><br />
 <pre class="prettyprint"><br />
-const char <strong>className = &#8220;Video&#8221;;<br />
+Video <strong>video = [[Video alloc] init];<br />
+video.name = @&quot;first video&quot;;<br />
+</pre><br />
+Second,创建一个Object实例，动态添加属性<br />
+<pre class="prettyprint"><br />
+NSObject *video = [[NSObject alloc] init];<br />
+objc_setAssociatedObject(video, &#8220;name&#8221;, @&quot;second video&quot;, OBJC_ASSOCIATION_COPY);<br />
+</pre><br />
+Third,动态创建video类，然后创建实例<br />
+<pre class="prettyprint"><br />
+const char *className = &#8220;Video&#8221;;<br />
 Class kClass = objc_getClass(className);<br />
 if (!kClass) {<br />
     Class superClass = [NSObject class];<br />

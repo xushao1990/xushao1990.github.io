@@ -1,0 +1,64 @@
+---
+layout: post
+title: 进度条的小demo
+---
+
+<!-- h1. {{ page.title }} -->
+
+<!-- p(meta). 2014年05月27日14:15:51 - 徐同同 -->
+
+用到了 - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode NS_AVAILABLE_IOS(6_0);
+
+效果图：
+<a href="/"><img id="home" alt="Home" src="/files/进度条的小demo/progress.gif" /></a>
+素材：
+背景边框： <a href="/"><img id="home" alt="Home" src="/files/进度条的小demo/back.png" /></a><a href="/">
+填充的颜色块：<img id="home" alt="Home" src="/files/进度条的小demo/content.png" /></a>
+
+<pre class="prettyprint">
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIImageView *back = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 22, 122)];
+    back.center = CGPointMake(160, 200);
+    back.image = [UIImage imageNamed:@"back"];
+    [self.view addSubview:back];
+    
+    //填充的色块，可以用纯色或者渐变。
+
+    //UIImageResizingModeStretch为拉伸
+
+    //UIEdgeInsetsMake(10, 0, 10, 0)为设置该范围内的进行拉伸
+
+    UIImageView *content = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 18, 118)];
+    content.image = [[UIImage imageNamed:@"content"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 0, 10, 0) resizingMode:UIImageResizingModeStretch];
+    content.tag = 1;
+    [back addSubview:content];
+    
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    slider.center = CGPointMake(160, 60);
+    slider.value = 1.0;
+    [slider addTarget:self action:@selector(sliderValue:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:slider];
+    
+}
+
+- (void)sliderValue:(UISlider *)sender
+{
+    [[self.view viewWithTag:1] setFrame:[self rectWithProgress:sender.value]];
+}
+
+//根据进度调整frame
+- (CGRect)rectWithProgress:(CGFloat)progress
+{
+    CGRect origionRect = CGRectMake(2, 2, 18, 118);
+    CGFloat height = CGRectGetHeight(origionRect) * progress;
+    return CGRectMake(2, 120 - height, 18, height);
+}
+</pre>
+
+resizableImageWithCapInsets:UIEdgeInsetsMake(10, 0, 10, 0)的效果解释：
+<img id="home" alt="Home" src="/files/进度条的小demo/1337621781_7225.png" /></a>
+
