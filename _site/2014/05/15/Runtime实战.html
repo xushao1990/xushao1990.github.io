@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>Runtime实战 - 未来某天</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="/css/syntax.css" />
+		<link href="desert.css" rel="stylesheet" type="text/css" media="all">
+		<div id="disqus_thread"></div>
+		<script type="text/javascript" src="prettify.js">
+    	    var disqus_shortname = 'xushao'; // required: replace example with your forum shortname
+    		(function () {
+       		 var s = document.createElement('script'); s.async = true;
+        	s.type = 'text/javascript';
+        	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+   			 }());
+    </script>
+	</head>
+
+	<body>
+		<div id="logo">
+			<h1><a href="/">未来某天</a></h1>
+		</div>
+		<div id="wrapper">
+			<div id="content">
+				<h2>Runtime实战</h2>
+				<div class="cnt">
+					<p><!-- h1. Runtime实战 --></p>
+<p><!-- p(meta). 2014年05月27日14:15:51 - 徐同同 --></p>
+<p>文中示例来自互联网搜集和日常积累，做个整理</p>
+<p>场景一：<br />
+一个列表中有多种类型的cell，ViewController与cell传递model时，假如传递id类型的object，在cell内部进行model的判断，<br />
+而不同的model在cell上展示的属性名相同，此时用KVO进行赋值是十分方便的。有时会加入新的model，在不改变原有代码的基础上，<br />
+对是否存在该属性进行检测就十分必要了。</p>
+<pre class="prettyprint">
+- (BOOL)hasAttribute:(NSString *)attName
+{
+    BOOL flag = NO;
+    u_int count;
+    Ivar *ivars = class_copyIvarList([self class],&amp;count);
+    for (int i = 0; i &lt;count ; i++)
+    {
+        const char* propertyName = ivar_getName(ivars[i]);
+        NSString *strName = [[[NSString  stringWithCString:propertyName encoding:NSUTF8StringEncoding] componentsSeparatedByString:@"_"] lastObject];
+        if ([attName isEqualToString:strName]) {
+            flag = YES;
+            break;
+        }
+    }
+    if (ivars) {
+         free(ivars);
+    }
+    return flag;
+}
+</pre>
+<p>Ivar *class_copyIvarList(Class cls, unsigned int *outCount)  返回该类所有的属性和全局变量，私有全局变量和私有属性也能获取到，属性的话是带有_的,因为这块内存是copy得手动释放free()。<br />
+const char *ivar_getName(Ivar v) 返回实例的属性变量的name<br />
+<pre class="prettyprint"><br />
+objc_property_t *class_copyPropertyList(Class cls, unsigned int *outCount)<br />
+//这个是获取属性的<br />
+</pre><br />
+写一个NSObject的分类，在调用KVO之前，检测下是否包含该属性，不过还是要区分下属性和变量<br />
+场景二：<br />
+场景三：</p>
+					<p id="state">若无特别说明，本站文章均为原创，转载请保留链接，谢谢</p>
+				</div>
+				<div id="disqus_thread"></div>
+			</div>
+
+			<div id="footer">
+				<p>如无特殊说明，本站内容采用 <a title="CC BY-NC-SA 3.0" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh">CC BY-NC-SA 3.0</a> 进行许可</p>
+				<p>自由转载-非商用-非衍生-保持署名</p>
+				<p style="clear:both"></p>
+			</div>
+		</div>
+	</body>
+</html>
+
