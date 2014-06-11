@@ -1,0 +1,19 @@
+---
+layout: default
+title: Archives
+---
+<section class="content">
+	<div class="content-cnt fn-clear">
+		<div class="archives">
+			<h4 class="page-title">All posts is here.&nbsp;&nbsp;&nbsp;<span>({{ site.posts | size }} posts.)</span></h4>
+			{% for post in site.posts %}
+				<article class="main-excerpt fn-clear">
+					<h3 class="main-excerpt-title"><a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></h3>
+					<p class="date"><time pubdate="{{ post.date | date: '%b %d, %Y' }}">{{ post.date | date_to_string }}</time></p>
+					<p class="desc">{{ post.description }}</p>
+					 <p class="more"><a href="{{ post.url }}" title="Read More" rel="nofollow"><span>&#10149;</span>Read More</a></p>
+				</article>
+			{% endfor %}
+		</div>
+	</div>
+</section>

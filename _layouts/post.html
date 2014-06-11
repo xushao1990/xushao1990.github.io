@@ -1,43 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<title>{{ page.title }} - {{ site.title }}</title>
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="/css/syntax.css" />
-		<link href="desert.css" rel="stylesheet" type="text/css" media="all">
-		<div id="disqus_thread"></div>
-		<script type="text/javascript" src="prettify.js">
-    	    var disqus_shortname = 'xushao'; // required: replace example with your forum shortname
-    		(function () {
-       		 var s = document.createElement('script'); s.async = true;
-        	s.type = 'text/javascript';
-        	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-   			 }());
+---
+layout: default
+---
+<section class="content">
+	<div class="content-cnt fn-clear">
+		<div class="main fn-clear">
+			<article class="entry">
+				<h1 class="title">{{ page.title }}</h1>
+               	<p class="meta"><time class="date" pubdate="{{ page.date | date_to_utc | date: '%Y-%m-%d' }}">{{ page.date | date_to_string }}</time> By <a href="/contact.html" class="author" title="author">{{ site.author.name }}</a><g:plusone size="small"></g:plusone></p>
+ 			 	{{ content }}
+                <nav class="pagination-link">
+                    {% if page.previous %}
+                    <a class="prev" href="{{ page.previous.url }}" rel="bookmark">&laquo;&nbsp;{{ page.previous.title | truncatewords:5 }}</a>
+                    {% endif %}
+                    {% if page.next %}
+                    <a class="next" href="{{ page.next.url }}" rel="bookmark">{{ page.next.title | truncatewords:5 }}&nbsp;&raquo;</a>
+                    {% endif %}
+                 </nav>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'xushao1990'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
     </script>
-	</head>
-
-	<body>
-		<div id="logo">
-			<h1><a href="/">{{ site.title }}</a></h1>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+			</article><!-- .entry -->		
 		</div>
-		<div id="wrapper">
-			<div id="content">
-				<h2>{{ page.title }}</h2>
-				<div class="cnt">
-					{{ content }}
-					<p id="state">若无特别说明，本站文章均为原创，转载请保留链接，谢谢</p>
-				</div>
-				<div id="disqus_thread"></div>
-			</div>
-
-			<div id="footer">
-				<p>如无特殊说明，本站内容采用 <a title="CC BY-NC-SA 3.0" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh">CC BY-NC-SA 3.0</a> 进行许可</p>
-				<p>自由转载-非商用-非衍生-保持署名</p>
-				<p style="clear:both"></p>
-			</div>
+		<div class="aside fn-clear">
+			{% include wg-contact.html %}
+			{% include wg-project.html %}
+			{% include wg-other.html %}
 		</div>
-	</body>
-</html>
-
+	</div>
+</section>
