@@ -1,0 +1,13 @@
+---
+layout: post
+title: 近期目标
+date: 2014-06-12
+comments: true
+categories: mind
+cattitle: 每一阶段的目标
+description: 有了目标才有方向，才有动力！
+---
+
+2014年06月12日
+1、iOS下单元测试
+2、Test Driven Development
