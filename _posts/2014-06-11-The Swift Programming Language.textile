@@ -1,0 +1,7 @@
+---
+layout: post
+title: 《The Swift Programming Language》 翻译
+categories: swift
+---
+
+说明：本翻译来自于iBooks电子书，https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewBook?id=881256329。

@@ -1,0 +1,17 @@
+---
+layout: post
+title: grep命令
+category: basic
+---
+
+### 通过关键字搜索framework或者lib用了什么技术
+
+* grep -l 'boss' *   显示所有包含boss的文件名。
+* grep -n 'boss' file在匹配行之前加行号。
+* grep -i 'boss' file显示匹配行，boss不区分大小写。
+* grep -v 'boss' file显示所有不匹配行。
+* grep -q 'boss' file找到匹配行，但不显示，但可以检查grep的退出状态。（0为匹配成功）
+* grep -c 'boss' file只显示匹配行数（包括0）。
+* grep   "$boss" file扩展变量boss的值再执行命令。
+* ps -ef|grep "^*user1" 搜索user1的命令，即使它前面有零个或多个空格。
+* ps -e|grep -E 'grant_server|commsvr|tcpsvr|dainfo' 查找多个字符串的匹配（grep -E相当于egrep）

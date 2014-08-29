@@ -1,0 +1,104 @@
+---
+layout: post
+title: svn
+category: basic
+---
+
+* 从服务器checkout
+
+    svn checkout http://114.215.194.49:1234/svn/xxx/xxx --username=xxx --password=xxx /Users/xx/xx/xxx
+
+
+* 更新文件
+
+    svn up
+
+
+* 添加文件
+	
+    svn add xxx 
+
+
+* 提交
+
+    svn ci -m "更新描述"
+
+* 未提交前查看不同 
+    
+    svn diff
+
+* 查看文件状态  svn st
+
+<pre>
+
+    ‘ ‘ no modifications. 没有改动
+
+    ‘A’ Added. 新增加的项目
+
+    ‘C’ Conflicted. 项目内容与更新得到的数据冲突了
+
+    ‘D’ Deleted. 要删除的项目
+
+    ‘I’ Ignored. 已忽略
+
+    ‘M’ Modified. 内容有改动
+
+    ‘R’ Replaced. 在svn仓库中是一个目录, 在本地是一个同名的文件. 反之亦然.
+
+    ‘X’ 项目未版本化, 与外部连接相关
+
+    ‘?’ 未版本化的文件
+
+    ‘!’ 项目丢失, 或者说目录不完整
+
+    ‘~’ 本地有一个未版本化的项目, 在svn仓库里有一个同名项目
+
+</pre>
+
+* mac下出现.a文件无法上传，需要手动添加到svn目录
+
+    svn add xx/xxx/*.a
+
+* 需要忽略某些文件或者文件夹
+    
+    $ cd
+    $ vi .bash_profile
+    在打开的文件里面添加
+    export SVN_EDITOR=/usr/bin/vim
+    然后关闭，这是配置SVN默认使用的编辑器
+    cd到需要忽略文件的父目录
+    $ svn propedit svn:ignore Pods
+
+    这样就把Pods文件夹忽略了
+
+* 在终端使用svn时需要掌握快捷键
+
+<pre>
+alt + 左右方向键，将光标移动到最近的一个单词的头或者尾
+control + a/e,将光标移动到句首或者句尾
+</pre>
+
+
+* 使用xcodebuild命令
+
+$xcodebuild -usage
+
+* xcodebuild [-project <projectname>] [[-target <targetname>]...|-alltargets] [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+
+* xcodebuild [-project <projectname>] -scheme <schemeName> [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+
+* xcodebuild -workspace <workspacename> -scheme <schemeName> [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+
+* xcodebuild -version [-sdk [<sdkfullpath>|<sdkname>] [<infoitem>] ]
+       
+* xcodebuild -list [[-project <projectname>]|[-workspace <workspacename>]]
+
+* xcodebuild -showsdks
+
+可以使用 xcodebuild -configuration Release -target "dq" 建立dq这个工程的Release版本
+
+也可以使用 xcodebuild -configuration DailyBuild -target "dq" 建立dq这个工程的DailyBuild版本
+
+也可以使用 xcodebuild -workspace dq.xcworkspace -scheme dq -configuration DailyBuild SYMROOT=$(PWD)/build  建立dq.workspace的scheme为dq、configuration为DailBuild的版本
+
+

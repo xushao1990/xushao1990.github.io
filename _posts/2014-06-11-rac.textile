@@ -1,0 +1,54 @@
+---
+layout: post
+title: cocoa中的响应式编程
+date: 2014-06-11
+categories: ReactiveCocoa
+---
+
+p. 今天看到博客"无往不胜"写的RAC实战，就顺便学习下，惭愧！
+
+p. ARC环境。
+
+p. 平时使用block时为了避免循环引用，常常这么做
+
+<pre>- (void)blockTestCompletionHandle:(void (^)(BOOL finished))completionHandle
+{
+    if (completionHandle) {
+        completionHandle(YES);
+    }
+}
+- (void)blockFunction
+{
+    NSLog(@"block function");
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    __weak typeof(self) weakSelf = self;
+    [self blockTestCompletionHandle:^(BOOL finished) {
+        __strong typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf blockFunction];
+    }];
+}</pre>
+
+p. 在使用RAC中，发现有该写法
+
+<pre>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    @weakify (self);
+    [self blockTestCompletionHandle:^(BOOL finished) {
+        @strongify (self);
+        [self blockFunction];
+    }];
+}</pre>
+
+p. 查了查资料找到了这个
+
+p. https://github.com/jspahrsummers/libextobjc
+
+p. 这么多宏！直接跪了！膜拜！
+
+p. 这是个非常强大的Objective-C库的扩展,为Objective-C提供诸如Safe categories、Concrete protocols、简单和安全的key paths以及简单使用block中的弱变量等功能。
+
+p. 这块的功能在RAC已经集成，#import <RACEXTScope.h>即可使用
